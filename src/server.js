@@ -14,6 +14,14 @@ const configRoutes = require('./routes/config');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Railway (y la mayoría de los PaaS) ponen la app detrás de un único
+// proxy propio, que agrega el header X-Forwarded-For con la IP real del
+// visitante. Sin esto, express-rate-limit rechaza cada petición porque
+// no puede confiar en ese header. El valor 1 (no `true`) le dice a
+// Express que confíe solo en ese primer proxy inmediato — no en toda
+// una cadena arbitraria — que es lo correcto para este tipo de hosting.
+app.set('trust proxy', 1);
+
 // Chequeo de env vars críticas al arrancar, para fallar rápido y claro
 // en vez de un error críptico en el primer request.
 const REQUIRED_ENV = ['JWT_SECRET', 'CLOUDINARY_CLOUD_NAME', 'CLOUDINARY_API_KEY', 'CLOUDINARY_API_SECRET'];
