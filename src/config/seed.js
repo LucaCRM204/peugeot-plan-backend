@@ -126,6 +126,7 @@ const VEHICULOS = [
 ];
 
 const CONFIG_INICIAL = [
+  ['logo_url', ''], // completar en el panel admin (subir el logo de la marca)
   ['whatsapp_numero', ''], // completar en el panel admin
   ['whatsapp_mensaje_default', 'Hola! Quiero info sobre planes de ahorro Peugeot'],
   ['telefono_contacto', ''],
